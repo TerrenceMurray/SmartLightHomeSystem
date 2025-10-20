@@ -46,7 +46,7 @@ public class SmartHomeLightingSystem {
 
         alice.execute(new TurnOffCommand(bedroomHub)); // Turn off bedroom hub (both devices)
 
-        bob.execute(new SetBrightnessCommand(livingRoomHub, livingRoomLamp.getBrightness(), 0.8f));
+        bob.execute(new SetBrightnessCommand(livingRoomHub, 0.8f));
         
         alice.execute(new TurnOnCommand(bedroomLamp, bedroomLamp.getIsActive()));
 

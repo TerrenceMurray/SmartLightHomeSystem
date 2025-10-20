@@ -2,13 +2,11 @@ package com.terrencemurray.app.lights;
 
 import java.util.HashSet;
 
-import com.terrencemurray.app.utility.SetItem;
 import com.terrencemurray.app.utility.observer.Observer;
-import com.terrencemurray.app.utility.observer.Subject;
 
 import java.util.ArrayList;
 
-public class LightDeviceHub implements LightComponent, SetItem, Subject {
+public class LightDeviceHub implements LightComponent {
     private HashSet<LightComponent> devices;
     private String label;
     private ArrayList<Observer> observers;

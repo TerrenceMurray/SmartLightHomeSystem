@@ -4,6 +4,11 @@ import com.terrencemurray.app.lights.LightComponent;
 
 public final class SetBrightnessCommand extends Command {
 
+    public SetBrightnessCommand(LightComponent light, Float to) {
+        super(light);
+        this.to = to;
+    }
+
     public SetBrightnessCommand(LightComponent light, Float from, Float to) {
         super(light);
         this.from = from;

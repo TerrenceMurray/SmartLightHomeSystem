@@ -2,11 +2,10 @@ package com.terrencemurray.app.lights;
 
 import java.util.ArrayList;
 
-import com.terrencemurray.app.utility.SetItem;
 import com.terrencemurray.app.utility.observer.Observer;
-import com.terrencemurray.app.utility.observer.Subject;
 
-public class LightDevice implements LightComponent, SetItem, Subject {
+
+public class LightDevice implements LightComponent {
     private static int id = 1;
     private String serialNumber;
     private Boolean isActive;
