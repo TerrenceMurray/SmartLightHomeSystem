@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import com.terrencemurray.app.commands.Command;
+import com.terrencemurray.app.notifications.NotificationManager;
 import com.terrencemurray.app.utility.observer.Observer;
 
 public class User implements Observer {
@@ -18,7 +19,7 @@ public class User implements Observer {
     public User(String name) {
         this.id = idCounter++;
         this.name = name;
-        this.display = new MobileAppDisplay();
+        this.display = new MobileAppDisplay(this.getName());
         this.commandLog = new ArrayList<>();
         this.commandHistory = new Stack<>();
         this.remote = new SmartRemoteControl();
@@ -28,20 +29,23 @@ public class User implements Observer {
     public String getName() { return this.name; }
     public int getId() { return this.id; }
     public SmartRemoteControl getRemote() { return this.remote; }
+    public String getCommandLog() {
+        return String.join("\n", this.commandLog);
+    }
     
     @Override
     public void update(String message) {
-        this.display.updateStatus(message);
+        NotificationManager.Instance().pushNotification(message + " by " + this.name);
     }
 
-    public void execute(Command command) {
+    public void clickCommandButton(Command command) {
         this.remote.setCommand(command);
         this.remote.pressButton();
         this.commandHistory.push(command);
         this.commandLog.add("Executed: " + command.toString());
     }
 
-    public void undo() {
+    public void clickUndoButton() {
         if (!this.commandHistory.isEmpty()) {
             Command lastCommand = this.commandHistory.pop();
             this.remote.setCommand(lastCommand);
@@ -52,7 +56,5 @@ public class User implements Observer {
         }
     }
 
-    public String getCommandLog() {
-        return String.join("\n", this.commandLog);
-    }
+    
 }

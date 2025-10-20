@@ -39,16 +39,16 @@ public class SmartHomeLightingSystem {
         livingRoomHub.attach(bob);
 
         // 3. Execute at least five commands, including at least one undo().
-        alice.execute(new TurnOnCommand(bedroomBulb, bedroomBulb.getIsActive()));
+        alice.clickCommandButton(new TurnOnCommand(bedroomBulb, bedroomBulb.getIsActive()));
 
-        bob.execute(new TurnOnCommand(livingRoomLamp, livingRoomLamp.getIsActive()));
-        bob.undo();   // Undo: Turn off living room lamp
+        bob.clickCommandButton(new TurnOnCommand(livingRoomLamp, livingRoomLamp.getIsActive()));
+        bob.clickUndoButton();   // Undo: Turn off living room lamp
 
-        alice.execute(new TurnOffCommand(bedroomHub)); // Turn off bedroom hub (both devices)
+        alice.clickCommandButton(new TurnOffCommand(bedroomHub)); // Turn off bedroom hub (both devices)
 
-        bob.execute(new SetBrightnessCommand(livingRoomHub, 0.8f));
+        bob.clickCommandButton(new SetBrightnessCommand(livingRoomHub, 0.8f));
         
-        alice.execute(new TurnOnCommand(bedroomLamp, bedroomLamp.getIsActive()));
+        alice.clickCommandButton(new TurnOnCommand(bedroomLamp, bedroomLamp.getIsActive()));
 
         // 4. Print formatted log output for all users showing:
         
@@ -60,10 +60,10 @@ public class SmartHomeLightingSystem {
         System.out.println(bob.getCommandLog());
         
         // - Notifications received by all displays
-        System.out.println("\nAlice's Display Status:");
-        alice.getDisplay().displayStatus();
+        System.out.println("\n");
+        alice.getDisplay().display();
 
-        System.out.println("\nBob's Display Status:");
-        bob.getDisplay().displayStatus();
+        System.out.println("\n");
+        bob.getDisplay().display();
     }
 }

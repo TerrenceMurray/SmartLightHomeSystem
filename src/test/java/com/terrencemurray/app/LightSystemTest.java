@@ -145,7 +145,7 @@ public class LightSystemTest {
     public void testObserverNotifications() {
         System.out.println("=== Test 4: Observer Notification System ===");
         
-        final String expectedString = "The brightness of " + this.bulb.getSerialNumber() + " was adjusted to " + (0.6f * 100) + "%";
+        final String expectedString = "The brightness of " + this.bulb.getSerialNumber() + " was adjusted to " + (0.6f * 100) + "% by Test User";
         System.out.println("Expected notification message: " + expectedString);
         
         // Create an observer
@@ -161,7 +161,7 @@ public class LightSystemTest {
         System.out.println("Triggered brightness adjustment on bulb");
 
         // Verify that the notifications
-        String actualNotification = testUser.getDisplay().getStatusCache().get(0);
+        String actualNotification = testUser.getDisplay().getNotifications().get(0);
         System.out.println("Actual notification received: " + actualNotification);
         
         Assertions.assertEquals(expectedString, actualNotification);
@@ -169,10 +169,10 @@ public class LightSystemTest {
         // Test multiple notifications
         lamp.attach(testUser);
         lamp.turnOn();
-        System.out.println("Additional notification from lamp: " + testUser.getDisplay().getStatusCache().get(1));
+        System.out.println("Additional notification from lamp: " + testUser.getDisplay().getNotifications().get(1));
         
         // Verify observer received both notifications
-        Assertions.assertEquals(2, testUser.getDisplay().getStatusCache().size());
+        Assertions.assertEquals(2, testUser.getDisplay().getNotifications().size());
         
         System.out.println("✅ Test 4 PASSED: Observer notifications work correctly\n");
     }

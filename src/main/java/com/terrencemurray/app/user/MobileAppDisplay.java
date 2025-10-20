@@ -2,21 +2,22 @@ package com.terrencemurray.app.user;
 
 import java.util.ArrayList;
 
+import com.terrencemurray.app.notifications.NotificationManager;
+
 public class MobileAppDisplay {
-    private ArrayList<String> statusCache;
+    private NotificationManager notificationManager;
+    private String username;
 
-    public ArrayList<String> getStatusCache() { return this.statusCache; }
+    public ArrayList<String> getNotifications() { return this.notificationManager.getNotifications(); }
 
-    public MobileAppDisplay() {
-        this.statusCache = new ArrayList<>();
+    public MobileAppDisplay(String name) {
+        this.notificationManager = NotificationManager.Instance();
+        this.username = name;
     }
 
-    public void updateStatus(String status) {
-        this.statusCache.add(status);
-    }
-
-    public void displayStatus() {
-        for (String status : statusCache) {
+    public void display() {
+        System.out.println("Welcome back, " + this.username);
+        for (String status : this.notificationManager.getNotifications()) {
             System.out.println("[" + java.time.LocalDateTime.now() + "] " + status);
         }
     }
