@@ -35,42 +35,42 @@ public class LightDeviceHub implements LightComponent, SetItem, Subject {
     }
 
     @Override
-    public boolean turnOn() {
+    public Boolean turnOn() {
         for (LightComponent device : devices) {
             if (!device.turnOn()) {
                 notifyObservers(device.getClass().getSimpleName() + " on " + this.label + " failed to turn on");
-                return false;
+                return Boolean.FALSE;
             }
         }
 
         notifyObservers("All devices on " + this.label + " were turned on");
-        return true;
+        return Boolean.TRUE;
     }
 
     @Override
-    public boolean turnOff() {
+    public Boolean turnOff() {
         for (LightComponent device : devices) {
             if (!device.turnOff()) {
                 notifyObservers(device.getClass().getSimpleName() + " on " + this.label + " failed to turn off");
-                return false;
+                return Boolean.FALSE;
             }
         }
 
         notifyObservers("All devices on " + this.label + " were turned off");
-        return true;
+        return Boolean.TRUE;
     }
     
     @Override
-    public boolean adjustBrightness(float level) {
+    public Boolean adjustBrightness(float level) {
         for (LightComponent device : devices) {
             if (!device.adjustBrightness(level)) {
                 notifyObservers("The brightness of " + device.getClass().getSimpleName() + " on " + this.label + " failed to adjust to " + (level * 100) + "%");
-                return false;
+                return Boolean.FALSE;
             }
         }
         
         notifyObservers("The brightness of devices on " + this.label + " was adjusted to " + (level * 100) + "%");
-        return true;
+        return Boolean.TRUE;
     }
 
     @Override

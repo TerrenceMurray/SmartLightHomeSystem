@@ -1,7 +1,7 @@
 package com.terrencemurray.app.lights;
 
 public interface LightComponent {
-    public boolean turnOn();
-    public boolean turnOff();
-    public boolean adjustBrightness(float level); // between 0 and 1
+    public Boolean turnOn();
+    public Boolean turnOff();
+    public Boolean adjustBrightness(float level); // between 0 and 1
 }

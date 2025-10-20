@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class MobileAppDisplay {
     private ArrayList<String> statusCache;
 
+    public ArrayList<String> getStatusCache() { return this.statusCache; }
+
     public MobileAppDisplay() {
         this.statusCache = new ArrayList<>();
     }

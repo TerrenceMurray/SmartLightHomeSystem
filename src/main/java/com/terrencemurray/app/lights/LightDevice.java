@@ -9,12 +9,12 @@ import com.terrencemurray.app.utility.observer.Subject;
 public class LightDevice implements LightComponent, SetItem, Subject {
     private static int id = 1;
     private String serialNumber;
-    private boolean isActive;
+    private Boolean isActive;
     private float brightness;
     private ArrayList<Observer> observers;
 
     public String getSerialNumber() { return this.serialNumber; }
-    public boolean getIsActive() { return this.isActive; }
+    public Boolean getIsActive() { return this.isActive; }
     public float getBrightness() { return this.brightness; }
 
     public LightDevice() {
@@ -27,30 +27,30 @@ public class LightDevice implements LightComponent, SetItem, Subject {
     }
 
     @Override
-    public boolean turnOn() {
-        this.isActive = true;
+    public Boolean turnOn() {
+        this.isActive = Boolean.TRUE;
 
         notifyObservers("The light " + this.serialNumber + " was turned on");
-        return true;
+        return Boolean.TRUE;
     }
 
     @Override
-    public boolean turnOff() {
-        this.isActive = false;
+    public Boolean turnOff() {
+        this.isActive = Boolean.FALSE;
         
         notifyObservers("The light " + this.serialNumber + " was turned off");
-        return true;
+        return Boolean.TRUE;
     }
 
     @Override
-    public boolean adjustBrightness(float level) {
+    public Boolean adjustBrightness(float level) {
         if (level < 0 || level > 1)
-            return false;
+            return Boolean.FALSE;
 
         this.brightness = level;
 
         notifyObservers("The brightness of " + this.serialNumber + " was adjusted to " + (level * 100) + "%");
-        return true;
+        return Boolean.TRUE;
     }
 
     @Override

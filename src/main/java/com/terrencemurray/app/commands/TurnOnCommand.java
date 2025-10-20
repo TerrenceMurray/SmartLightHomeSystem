@@ -19,11 +19,16 @@ public class TurnOnCommand extends Command {
 
     @Override
     public void undo() {
-        // If it's a hub, just reverse the operation on the entire hub
-        if (from instanceof Boolean && ((Boolean) from).booleanValue()) {
-            light.turnOff();
+        // Restore the previous state
+        if (from instanceof Boolean) {
+            if (((Boolean) from).booleanValue()) {
+                light.turnOn();  // Restore to on state
+            } else {
+                light.turnOff(); // Restore to off state
+            }
         } else {
-            light.turnOn();
+            // If no previous state recorded, reverse the turn on operation
+            light.turnOff();
         }
     }
 
