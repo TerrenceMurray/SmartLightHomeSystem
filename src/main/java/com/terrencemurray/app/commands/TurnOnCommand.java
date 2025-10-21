@@ -13,12 +13,12 @@ public class TurnOnCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    protected void doExecute() {
         light.turnOn();
     }
 
     @Override
-    public void undo() {
+    protected void doUndo() {
         // Restore the previous state
         if (from instanceof Boolean) {
             if (((Boolean) from).booleanValue()) {
@@ -33,6 +33,7 @@ public class TurnOnCommand extends Command {
     }
 
     public String toString() {
-        return "Turn on light of " + light.getClass().getSimpleName();
+        String actor = this.executedBy != null ? this.executedBy.getName() : "None";
+        return "[" + this.executedAt.toString() +  "] Turn on light of " + light.getClass().getSimpleName() + " (Actor " + actor + ")";
     }    
 }

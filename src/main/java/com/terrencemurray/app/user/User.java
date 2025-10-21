@@ -39,10 +39,11 @@ public class User implements Observer {
     }
 
     public void clickCommandButton(Command command) {
-        this.remote.setCommand(command);
+        final Command taggedCommand = command.by(this);
+        this.remote.setCommand(taggedCommand);
         this.remote.pressButton();
-        this.commandHistory.push(command);
-        this.commandLog.add("Executed: " + command.toString());
+        this.commandHistory.push(taggedCommand);
+        this.commandLog.add("Executed\t" + command.toString());
     }
 
     public void clickUndoButton() {
@@ -50,11 +51,9 @@ public class User implements Observer {
             Command lastCommand = this.commandHistory.pop();
             this.remote.setCommand(lastCommand);
             this.remote.pressUndo();
-            this.commandLog.add("Undid: " + lastCommand.toString());
+            this.commandLog.add("Undid\t\t" + lastCommand.toString());
         } else {
             System.out.println("No commands to undo for user " + this.name);
         }
     }
-
-    
 }

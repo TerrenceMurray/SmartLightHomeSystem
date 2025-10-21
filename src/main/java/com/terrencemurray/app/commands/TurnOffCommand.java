@@ -13,12 +13,12 @@ public class TurnOffCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    protected void doExecute() {
         light.turnOff();
     }
 
     @Override
-    public void undo() {
+    protected void doUndo() {
         // If it's a hub, just reverse the operation on the entire hub
         if (from instanceof Boolean && ((Boolean) from).booleanValue()) {
             light.turnOn();
@@ -28,6 +28,7 @@ public class TurnOffCommand extends Command {
     }
 
     public String toString() {
-        return "Turn off light of " + light.getClass().getSimpleName();
+        String actor = this.executedBy != null ? this.executedBy.getName() : "None";
+        return "[" + this.executedAt.toString() +  "] Turn off light of " + light.getClass().getSimpleName() + " (Actor " + actor + ")";
     }
 }

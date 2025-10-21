@@ -16,16 +16,17 @@ public final class SetBrightnessCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    protected void doExecute() {
         light.adjustBrightness(((Float) to).floatValue());
     }
 
     @Override
-    public void undo() {
+    protected void doUndo() {
         light.adjustBrightness(((Float) from).floatValue());
     }
 
     public String toString() {
-        return "Set brightness to " + (((Float) to) * 100) + "% on " + light.getClass().getSimpleName();
+        String actor = this.executedBy != null ? this.executedBy.getName() : "None";
+        return "[" + this.executedAt.toString() +  "] Set brightness to " + (((Float) to) * 100) + "% on " + light.getClass().getSimpleName() + " (Actor " + actor + ")";
     }
 }

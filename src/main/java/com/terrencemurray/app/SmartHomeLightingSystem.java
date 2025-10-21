@@ -53,10 +53,8 @@ public class SmartHomeLightingSystem {
         // 4. Print formatted log output for all users showing:
         
         // - Command history per user
-        System.out.println("Alice's Command Log:");
         System.out.println(alice.getCommandLog());
-        
-        System.out.println("\nBob's Command Log:");
+        System.out.println("\n");
         System.out.println(bob.getCommandLog());
         
         // - Notifications received by all displays
