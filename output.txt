@@ -1,0 +1,58 @@
+=== Smart Home Lighting System ===
+
+--- Executing Commands ---
+
+
+============================================================
+COMMAND HISTORY
+============================================================
+
+Alice's Commands:
+Executed	[2025-10-21T03:06:36.048039287Z] Turn on light of Bulb (Actor Alice)
+Executed	[2025-10-21T03:06:36.065612751Z] Turn off light of Room (Actor Alice)
+Executed	[2025-10-21T03:06:36.077439946Z] Turn on light of Lamp (Actor Alice)
+
+Bob's Commands:
+Executed	[2025-10-21T03:06:36.064946705Z] Turn on light of Lamp (Actor Bob)
+Undid		[2025-10-21T03:06:36.064946705Z] Turn on light of Lamp (Actor Bob)
+Executed	[2025-10-21T03:06:36.066483063Z] Set brightness to 8000.0% on Room (Actor Bob)
+
+============================================================
+USER NOTIFICATIONS
+============================================================
+
+Welcome back, Alice
+[2025-10-20T23:06:36.100423078] The light 2366231 was turned on by Alice
+[2025-10-20T23:06:36.101116942] The light 2366231 was turned on by Bob
+[2025-10-20T23:06:36.101246251] The light 2366234 was turned on by Alice
+[2025-10-20T23:06:36.101458021] The light 2366234 was turned on by Bob
+[2025-10-20T23:06:36.101684940] The light 2366234 was turned off by Alice
+[2025-10-20T23:06:36.101938723] The light 2366234 was turned off by Bob
+[2025-10-20T23:06:36.102044785] The light 2366232 was turned off by Alice
+[2025-10-20T23:06:36.102105180] The light 2366232 was turned off by Bob
+[2025-10-20T23:06:36.102173117] The light 2366231 was turned off by Alice
+[2025-10-20T23:06:36.102269529] The light 2366231 was turned off by Bob
+[2025-10-20T23:06:36.102350312] All devices on Bedroom were turned off by Alice
+[2025-10-20T23:06:36.102411218] All devices on Bedroom were turned off by Bob
+[2025-10-20T23:06:36.102452860] The brightness of Bulb on Living Room failed to adjust to 8000.0% by Alice
+[2025-10-20T23:06:36.102493194] The brightness of Bulb on Living Room failed to adjust to 8000.0% by Bob
+[2025-10-20T23:06:36.102659541] The light 2366232 was turned on by Alice
+[2025-10-20T23:06:36.102723398] The light 2366232 was turned on by Bob
+
+Welcome back, Bob
+[2025-10-20T23:06:36.103049237] The light 2366231 was turned on by Alice
+[2025-10-20T23:06:36.103124872] The light 2366231 was turned on by Bob
+[2025-10-20T23:06:36.103196165] The light 2366234 was turned on by Alice
+[2025-10-20T23:06:36.103378518] The light 2366234 was turned on by Bob
+[2025-10-20T23:06:36.103460381] The light 2366234 was turned off by Alice
+[2025-10-20T23:06:36.103892237] The light 2366234 was turned off by Bob
+[2025-10-20T23:06:36.104076590] The light 2366232 was turned off by Alice
+[2025-10-20T23:06:36.104155760] The light 2366232 was turned off by Bob
+[2025-10-20T23:06:36.104207162] The light 2366231 was turned off by Alice
+[2025-10-20T23:06:36.104264630] The light 2366231 was turned off by Bob
+[2025-10-20T23:06:36.104306900] All devices on Bedroom were turned off by Alice
+[2025-10-20T23:06:36.104577204] All devices on Bedroom were turned off by Bob
+[2025-10-20T23:06:36.104673957] The brightness of Bulb on Living Room failed to adjust to 8000.0% by Alice
+[2025-10-20T23:06:36.104917469] The brightness of Bulb on Living Room failed to adjust to 8000.0% by Bob
+[2025-10-20T23:06:36.104986239] The light 2366232 was turned on by Alice
+[2025-10-20T23:06:36.105043519] The light 2366232 was turned on by Bob
