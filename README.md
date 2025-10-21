@@ -2,6 +2,7 @@
 A multi-user lighting management system demonstrating advanced OOP design patterns
 
 **UML Class Diagram**
+
 ![asg2-oop](https://github.com/user-attachments/assets/8d609ba2-b4f4-45ec-bb87-cb3c357ed636)
 
 **Patterns Implemented:**
