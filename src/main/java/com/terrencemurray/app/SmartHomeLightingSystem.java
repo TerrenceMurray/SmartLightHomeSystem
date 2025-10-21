@@ -1,6 +1,7 @@
 package com.terrencemurray.app;
 
 import com.terrencemurray.app.commands.*;
+import com.terrencemurray.app.lights.LightComponent;
 import com.terrencemurray.app.lights.LightDeviceHub;
 import com.terrencemurray.app.lights.devices.Bulb;
 import com.terrencemurray.app.lights.devices.Lamp;
@@ -9,59 +10,77 @@ import com.terrencemurray.app.user.User;
 
 public class SmartHomeLightingSystem {
     
-    public static void main (String[] args) {
-        // 2. Create two or more users, each with:
-        // - Their own SmartRemoteControl
-        // - Their own MobileAppDisplay
+    public static void main(String[] args) {
+        System.out.println("=== Smart Home Lighting System ===\n");
+        
+        // Create users
         final User alice = new User("Alice");
         final User bob = new User("Bob");
 
-        // 1. Create at least three individual light devices and two groups.
+        // Create individual devices with descriptive labels
         final Bulb bedroomBulb = new Bulb();
         final Lamp bedroomLamp = new Lamp();
-        final LightDeviceHub bedroomHub = new Room("Bedroom Hub");
+        final Bulb livingRoomBulb = new Bulb();
+        final Lamp livingRoomLamp = new Lamp();
+
+        // Create groups
+        final LightDeviceHub bedroomHub = new Room("Bedroom");
         bedroomHub.addDevice(bedroomBulb);
         bedroomHub.addDevice(bedroomLamp);
 
-        final Bulb livingRoomBulb = new Bulb();
-        final Lamp livingRoomLamp = new Lamp();
-        final LightDeviceHub livingRoomHub = new Room("Living Room Hub");
+        final LightDeviceHub livingRoomHub = new Room("Living Room");
         livingRoomHub.addDevice(livingRoomBulb);
         livingRoomHub.addDevice(livingRoomLamp);
 
-        // 2. Add users as observers to the light devices and hubs
-        bedroomBulb.attach(alice);
-        bedroomLamp.attach(alice);
-        bedroomHub.attach(alice);
+        // Attach all users as observers to all devices
+        // (Both users should see all notifications)
+        attachAllUsers(bedroomBulb, alice, bob);
+        attachAllUsers(bedroomLamp, alice, bob);
+        attachAllUsers(bedroomHub, alice, bob);
+        attachAllUsers(livingRoomBulb, alice, bob);
+        attachAllUsers(livingRoomLamp, alice, bob);
+        attachAllUsers(livingRoomHub, alice, bob);
 
-        livingRoomBulb.attach(bob);
-        livingRoomLamp.attach(bob);
-        livingRoomHub.attach(bob);
+        System.out.println("--- Executing Commands ---\n");
 
-        // 3. Execute at least five commands, including at least one undo().
-        alice.clickCommandButton(new TurnOnCommand(bedroomBulb, bedroomBulb.getIsActive()));
-
-        bob.clickCommandButton(new TurnOnCommand(livingRoomLamp, livingRoomLamp.getIsActive()));
-        bob.clickUndoButton();   // Undo: Turn off living room lamp
-
-        alice.clickCommandButton(new TurnOffCommand(bedroomHub)); // Turn off bedroom hub (both devices)
-
-        bob.clickCommandButton(new SetBrightnessCommand(livingRoomHub, 0.8f));
+        // Execute commands (5+ commands including undo)
+        alice.clickCommandButton(new TurnOnCommand(bedroomBulb));
         
-        alice.clickCommandButton(new TurnOnCommand(bedroomLamp, bedroomLamp.getIsActive()));
-
-        // 4. Print formatted log output for all users showing:
+        bob.clickCommandButton(new TurnOnCommand(livingRoomLamp));
+        bob.clickUndoButton();  // Undo the lamp turn on
         
-        // - Command history per user
+        alice.clickCommandButton(new TurnOffCommand(bedroomHub));  // Turn off entire bedroom
+        
+        bob.clickCommandButton(new SetBrightnessCommand(livingRoomHub, 80.0f));
+        
+        alice.clickCommandButton(new TurnOnCommand(bedroomLamp));
+
+        // Display results
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("COMMAND HISTORY");
+        System.out.println("=".repeat(60) + "\n");
+        
+        System.out.println("Alice's Commands:");
         System.out.println(alice.getCommandLog());
-        System.out.println("\n");
+        
+        System.out.println("\nBob's Commands:");
         System.out.println(bob.getCommandLog());
         
-        // - Notifications received by all displays
-        System.out.println("\n");
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("USER NOTIFICATIONS");
+        System.out.println("=".repeat(60) + "\n");
+        
         alice.getDisplay().display();
-
-        System.out.println("\n");
+        System.out.println();
         bob.getDisplay().display();
+    }
+    
+    /**
+     * Helper method to attach multiple users to a light component
+     */
+    private static void attachAllUsers(LightComponent device, User... users) {
+        for (User user : users) {
+            device.attach(user);
+        }
     }
 }
