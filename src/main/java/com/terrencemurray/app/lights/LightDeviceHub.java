@@ -4,20 +4,18 @@ import java.util.HashSet;
 
 import com.terrencemurray.app.utility.observer.Observer;
 
-import java.util.ArrayList;
-
 public class LightDeviceHub implements LightComponent {
     private HashSet<LightComponent> devices;
     private String label;
-    private ArrayList<Observer> observers;
+    private HashSet<Observer> observers;
 
     public String getLabel() { return this.label; }
-    public ArrayList<Observer> getObservers() { return this.observers; }
+    public HashSet<Observer> getObservers() { return this.observers; }
     public HashSet<LightComponent> getDevices() { return this.devices; }
 
     public LightDeviceHub (String label) {
         this.devices = new HashSet<>();
-        this.observers = new ArrayList<>();
+        this.observers = new HashSet<>();
 
         this.label = label;
     }

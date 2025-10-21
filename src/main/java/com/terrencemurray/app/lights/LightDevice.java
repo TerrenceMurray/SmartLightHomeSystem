@@ -1,6 +1,6 @@
 package com.terrencemurray.app.lights;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.terrencemurray.app.utility.observer.Observer;
 
@@ -10,7 +10,7 @@ public class LightDevice implements LightComponent {
     private String serialNumber;
     private Boolean isActive;
     private float brightness;
-    private ArrayList<Observer> observers;
+    private HashSet<Observer> observers;
 
     public String getSerialNumber() { return this.serialNumber; }
     public Boolean getIsActive() { return this.isActive; }
@@ -20,7 +20,7 @@ public class LightDevice implements LightComponent {
         this.serialNumber = "236623" + id;
         this.isActive = false;
         this.brightness = 0.5f;
-        this.observers = new ArrayList<>();
+        this.observers = new HashSet<>();
         
         id += 1; // Increment id
     }

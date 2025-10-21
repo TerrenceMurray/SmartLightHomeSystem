@@ -12,10 +12,13 @@ public abstract class Command {
     protected Object to;
 
     protected Instant executedAt;
+    protected Instant undoneAt;
+
     protected User executedBy;
 
     public User getExecutedBy() { return this.executedBy; }
     public Instant getExecutedAt() { return this.executedAt; }
+    public Instant getUndoneAt() { return this.undoneAt; }
 
     public Command(LightComponent light) {
         this.light = light;
@@ -25,17 +28,13 @@ public abstract class Command {
     protected abstract void doUndo();
 
     public void execute() {
-        this.record();
+        this.executedAt = Instant.now();
         this.doExecute();
     };
 
     public void undo() {
-        this.record();
+        this.undoneAt = Instant.now();
         this.doUndo();
-    }
-
-    private void record() {
-        this.executedAt = Instant.now();
     }
     
     public Command by(User user) {

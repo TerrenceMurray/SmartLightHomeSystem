@@ -5,9 +5,10 @@ import java.util.Stack;
 
 import com.terrencemurray.app.commands.Command;
 import com.terrencemurray.app.notifications.NotificationManager;
+import com.terrencemurray.app.utility.SetItem;
 import com.terrencemurray.app.utility.observer.Observer;
 
-public class User implements Observer {
+public class User implements Observer, SetItem {
     private static int idCounter = 1;
     private int id;
     private String name;
@@ -37,6 +38,20 @@ public class User implements Observer {
     public void update(String message) {
         NotificationManager.Instance().pushNotification(message + " by " + this.name);
     }
+
+    @Override
+    public int hashCode() {
+        return this.id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof User == false)
+            throw new IllegalArgumentException("Argument must be of type User");
+        
+        User u = (User) o;
+        return u.id == this.id;
+    } 
 
     public void clickCommandButton(Command command) {
         final Command taggedCommand = command.by(this);
